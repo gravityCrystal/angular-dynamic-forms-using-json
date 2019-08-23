@@ -1,0 +1,22 @@
+<form [formGroup]="form " (submit)="submitForm() ">
+
+  <ng-template ngFor let-input [ngForOf]="formData ">
+
+    <ng-container [ngSwitch]="input.controlType ">
+      <ng-template [ngSwitchCase]=" 'text' ">
+        <div class="form-group ">
+          <label [for]="input.controlName "> {{input.controlName}}</label>
+          <ui-input [formControlName]="input.controlName " [inputName]="input.controlName " [idValue]="input.id" [inputValue]="input.currentValue ? input.currentValue : '' "
+            [required]="input.validators.required" [minlength]="input.validators.minlength " [maxlength]="input.validators.maxlength "
+            (clickHandler)="clickInput($event)" [inputDisabled]="false" [classValue]="input.class"></ui-input>
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-template>
+  <button type="submit ">
+    Submit
+  </button>
+  <div *ngIf="submitted ">
+    <pre>{{form.value | json}}</pre>
+  </div>
+</form>
